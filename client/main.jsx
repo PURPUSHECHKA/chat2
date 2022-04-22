@@ -1,10 +1,15 @@
-import React from 'react'
-import ReactDom from 'react-dom'
 import './assets/styles/main.scss'
+import React from 'react'
+import ReactDOM from 'react-dom'
 
-// eslint-disable-next-line import/extensions
-import Root from './config/root.jsx'
+import { BrowserRouter } from 'react-router-dom'
+import Root from './config/root'
 
-const target = document.getElementById('root')
-
-ReactDom.render(<Root />, target)
+const root = ReactDOM.createRoot(document.getElementById('root'))
+root.render(
+    <React.StrictMode>
+        <BrowserRouter>
+            <Root />
+        </BrowserRouter>
+    </React.StrictMode>
+)

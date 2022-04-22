@@ -13,7 +13,7 @@ const config = {
     },
     devServer: {
         hot: true,
-        open: true,
+        open: false,
         static: {
             directory: path.join(__dirname, 'dist')
         },
@@ -36,7 +36,7 @@ const config = {
     module: {
         rules: [
             {
-                test: /\.(js|jsx)$/,
+                test: /.(js|jsx)$/,
                 loader: 'babel-loader',
                 exclude: /node_modules/
             },
@@ -59,9 +59,12 @@ const config = {
             }
         ]
     },
+    resolve: {
+        extensions: ['.js', '.json', '.wasm', '.jsx']
+    },
     plugins: [
         new ESLintPlugin({
-            extensions: ['js', 'jsx'],
+            extensions: ['.js', '.jsx'],
             exclude: 'node_modules'
         }),
         new MiniCSSExtractPlugin({
