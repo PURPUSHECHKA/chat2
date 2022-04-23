@@ -2,21 +2,21 @@ const path = require('path')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const MiniCSSExtractPlugin = require('mini-css-extract-plugin')
 const ESLintPlugin = require('eslint-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 const config = {
     entry: './client/main.jsx',
     mode: 'development',
     output: {
-        filename: 'js/[name].bundle.js',
+        filename: 'assets/js/[name].[contenthash].js',
+        chunkFilename: 'assets/js/[name].[contenthash].chunk.js',
         path: path.resolve(__dirname, 'dist'),
-        publicPath: '/'
+        clean: true
     },
     devServer: {
         hot: true,
         open: false,
-        static: {
-            directory: path.join(__dirname, 'dist')
-        },
+
         port: 8087,
         proxy: {
             context: ['/api'],
@@ -63,20 +63,17 @@ const config = {
         extensions: ['.js', '.json', '.wasm', '.jsx']
     },
     plugins: [
+        new HtmlWebpackPlugin({
+            template: './public/index.html',
+            filename: 'index.html',
+            inject: 'body'
+        }),
         new ESLintPlugin({
             extensions: ['.js', '.jsx'],
             exclude: 'node_modules'
         }),
         new MiniCSSExtractPlugin({
             filename: 'css/main.css'
-        }),
-        new CopyWebpackPlugin({
-            patterns: [
-                {
-                    from: `${__dirname}/client/index.html`,
-                    to: 'index.html'
-                }
-            ]
         })
     ]
 }
