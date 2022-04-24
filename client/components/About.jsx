@@ -2,8 +2,11 @@ import React from 'react'
 
 const About = () => {
     return (
-        <div>
-            <h1>About</h1>
+        <div className="">
+            <h1 className="">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi ad nesciunt provident
+                enim ducimus explicabo, iste impedit. Fuga, magnam necessitatibus!
+            </h1>
         </div>
     )
 }
